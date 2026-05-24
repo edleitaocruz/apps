@@ -1,0 +1,199 @@
+<!doctype html>
+<html lang="pt">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Apps</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='7' fill='%231a1a18'/><text x='16' y='23' font-size='18' text-anchor='middle' fill='white'>✦</text></svg>">
+<link rel="stylesheet" href="https://rsms.me/inter/inter.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.5.0/dist/tabler-icons.min.css">
+<style>
+:root{
+  --font:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;
+  --bg-primary:#ffffff;--bg-secondary:#f7f7f6;--bg-tertiary:#f0eeeb;
+  --text-primary:#1a1a18;--text-secondary:#6b6b67;--text-tertiary:#9c9c97;
+  --border-light:rgba(0,0,0,0.08);--border-medium:rgba(0,0,0,0.15);
+  --radius-md:6px;--radius-lg:10px;
+  --accent:#4F46E5;
+}
+@media(prefers-color-scheme:dark){:root:not(.light){
+  --bg-primary:#1c1c1a;--bg-secondary:#242422;--bg-tertiary:#141412;
+  --text-primary:#f0eeeb;--text-secondary:#9c9c97;--text-tertiary:#6b6b67;
+  --border-light:rgba(255,255,255,0.07);--border-medium:rgba(255,255,255,0.12);
+  --accent:#7C73F2;
+}}
+html.dark:root{
+  --bg-primary:#1c1c1a;--bg-secondary:#242422;--bg-tertiary:#141412;
+  --text-primary:#f0eeeb;--text-secondary:#9c9c97;--text-tertiary:#6b6b67;
+  --border-light:rgba(255,255,255,0.07);--border-medium:rgba(255,255,255,0.12);
+  --accent:#7C73F2;
+}
+html.light:root{
+  --bg-primary:#ffffff;--bg-secondary:#f7f7f6;--bg-tertiary:#f0eeeb;
+  --text-primary:#1a1a18;--text-secondary:#6b6b67;--text-tertiary:#9c9c97;
+  --border-light:rgba(0,0,0,0.08);--border-medium:rgba(0,0,0,0.15);
+  --accent:#4F46E5;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--font);font-size:14px;color:var(--text-primary);background:var(--bg-tertiary);min-height:100vh;padding:40px 20px;display:flex;justify-content:center}
+.container{width:100%;max-width:540px}
+header{display:flex;align-items:center;justify-content:space-between;margin-bottom:32px}
+h1{font-size:22px;font-weight:500;letter-spacing:-0.01em}
+.toggle{background:var(--bg-primary);border:0.5px solid var(--border-medium);width:34px;height:34px;border-radius:var(--radius-md);cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--text-secondary);font-family:var(--font);transition:background .1s}
+.toggle:hover{background:var(--bg-secondary);color:var(--text-primary)}
+.grid{display:grid;gap:10px;margin-bottom:24px}
+.card{background:var(--bg-primary);border:0.5px solid var(--border-light);border-radius:var(--radius-lg);padding:18px 20px;text-decoration:none;color:inherit;display:flex;align-items:center;gap:14px;transition:border-color .1s,transform .1s;cursor:pointer;position:relative;group/card}
+.card:hover{border-color:var(--border-medium);transform:translateY(-1px)}
+.card-icon{width:36px;height:36px;flex-shrink:0;border-radius:var(--radius-md);background:var(--bg-secondary);display:flex;align-items:center;justify-content:center;font-size:18px;color:var(--text-secondary)}
+.card-body{flex:1;min-width:0}
+.card-name{font-weight:500;font-size:15px;margin-bottom:2px;color:var(--text-primary)}
+.card-url{font-size:12px;color:var(--text-tertiary);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.card-arrow{color:var(--text-tertiary);font-size:16px;flex-shrink:0;opacity:0;transition:opacity .1s}
+.card:hover .card-arrow{opacity:1}
+.card-delete{position:absolute;top:50%;right:14px;transform:translateY(-50%);background:none;border:none;color:var(--text-tertiary);cursor:pointer;font-size:14px;padding:6px;border-radius:var(--radius-md);opacity:0;transition:opacity .1s,color .1s,background .1s;font-family:var(--font)}
+.card:hover .card-delete{opacity:1}
+.card-delete:hover{color:#d33;background:var(--bg-secondary)}
+.add-btn{width:100%;padding:14px;background:transparent;border:1px dashed var(--border-medium);border-radius:var(--radius-lg);color:var(--text-secondary);cursor:pointer;font-family:var(--font);font-size:13px;display:flex;align-items:center;justify-content:center;gap:6px;transition:all .1s}
+.add-btn:hover{border-color:var(--text-secondary);color:var(--text-primary);background:var(--bg-primary)}
+.add-form{background:var(--bg-primary);border:0.5px solid var(--border-light);border-radius:var(--radius-lg);padding:18px;margin-bottom:24px;display:none}
+.add-form.open{display:block}
+.field{margin-bottom:12px}
+.field label{display:block;font-size:11px;color:var(--text-tertiary);text-transform:uppercase;letter-spacing:.06em;margin-bottom:5px}
+.field input{width:100%;padding:8px 10px;border:0.5px solid var(--border-medium);border-radius:var(--radius-md);font-size:14px;background:var(--bg-secondary);color:var(--text-primary);font-family:var(--font);outline:none}
+.field input:focus{border-color:var(--text-secondary)}
+.form-actions{display:flex;gap:8px;justify-content:flex-end;margin-top:14px}
+.btn{padding:7px 14px;border:0.5px solid var(--border-medium);border-radius:var(--radius-md);background:var(--bg-secondary);color:var(--text-primary);cursor:pointer;font-family:var(--font);font-size:13px;transition:background .1s}
+.btn:not(.btn-primary):hover{background:var(--bg-primary)}
+.btn-primary{background:var(--text-primary);color:var(--bg-primary);border-color:var(--text-primary)}
+.btn-primary:hover{opacity:.85}
+.empty{text-align:center;color:var(--text-tertiary);font-size:13px;padding:40px 0}
+footer{text-align:center;color:var(--text-tertiary);font-size:11px;margin-top:32px;letter-spacing:0.02em}
+</style>
+</head>
+<body>
+<div class="container">
+  <header>
+    <h1>Apps</h1>
+    <button class="toggle" onclick="toggleTheme()" id="theme-btn" title="Tema"><i class="ti ti-moon"></i></button>
+  </header>
+
+  <div class="grid" id="apps-grid"></div>
+
+  <div class="add-form" id="add-form">
+    <div class="field">
+      <label>Nome</label>
+      <input type="text" id="app-name" placeholder="Nome da app" autocomplete="off">
+    </div>
+    <div class="field">
+      <label>URL</label>
+      <input type="text" id="app-url" placeholder="https://..." autocomplete="off">
+    </div>
+    <div class="form-actions">
+      <button class="btn" onclick="closeForm()">Cancelar</button>
+      <button class="btn btn-primary" onclick="saveApp()">Adicionar</button>
+    </div>
+  </div>
+
+  <button class="add-btn" onclick="openForm()" id="add-button"><i class="ti ti-plus"></i> Adicionar app</button>
+
+  <footer>EC · <span id="year"></span></footer>
+</div>
+
+<script>
+const DEFAULT_APPS = [
+  { id:'ll', name:'LigaLize', url:'https://totalize.vercel.app/' },
+  { id:'cn', name:'Cinema',   url:'https://edleitaocruz.github.io/cinema/' },
+];
+
+let apps = [];
+let theme = localStorage.getItem('apps_theme')||'auto';
+
+function uid(){ return Math.random().toString(36).slice(2,9); }
+
+function load(){
+  try {
+    const raw = localStorage.getItem('apps_list');
+    apps = raw ? JSON.parse(raw) : DEFAULT_APPS;
+  } catch(e) { apps = DEFAULT_APPS; }
+}
+function save(){ localStorage.setItem('apps_list', JSON.stringify(apps)); }
+
+function render(){
+  const grid = document.getElementById('apps-grid');
+  if(!apps.length){
+    grid.innerHTML = '<div class="empty">Sem apps. Adiciona a primeira em baixo.</div>';
+    return;
+  }
+  grid.innerHTML = apps.map(a => {
+    const host = (() => { try { return new URL(a.url).hostname.replace(/^www\./,''); } catch { return a.url; } })();
+    const initial = a.name.trim().charAt(0).toUpperCase() || '◆';
+    return `<a href="${a.url}" class="card" target="_blank" rel="noopener">
+      <div class="card-icon">${initial}</div>
+      <div class="card-body">
+        <div class="card-name">${a.name}</div>
+        <div class="card-url">${host}</div>
+      </div>
+      <button class="card-delete" onclick="event.preventDefault();event.stopPropagation();deleteApp('${a.id}')" title="Remover"><i class="ti ti-trash"></i></button>
+      <i class="ti ti-arrow-up-right card-arrow"></i>
+    </a>`;
+  }).join('');
+}
+
+function openForm(){
+  document.getElementById('add-form').classList.add('open');
+  document.getElementById('add-button').style.display = 'none';
+  document.getElementById('app-name').focus();
+}
+function closeForm(){
+  document.getElementById('add-form').classList.remove('open');
+  document.getElementById('add-button').style.display = '';
+  document.getElementById('app-name').value = '';
+  document.getElementById('app-url').value = '';
+}
+function saveApp(){
+  const name = document.getElementById('app-name').value.trim();
+  let url = document.getElementById('app-url').value.trim();
+  if(!name || !url){ alert('Preenche nome e URL.'); return; }
+  if(!url.match(/^https?:\/\//i)) url = 'https://' + url;
+  apps.push({ id: uid(), name, url });
+  save(); render(); closeForm();
+}
+function deleteApp(id){
+  const a = apps.find(x => x.id === id);
+  if(!a) return;
+  if(!confirm(`Remover "${a.name}"?`)) return;
+  apps = apps.filter(x => x.id !== id);
+  save(); render();
+}
+
+function applyTheme(){
+  const html = document.documentElement;
+  html.classList.remove('dark','light');
+  if(theme === 'dark') html.classList.add('dark');
+  else if(theme === 'light') html.classList.add('light');
+  const btn = document.getElementById('theme-btn');
+  if(theme === 'dark') btn.innerHTML = '<i class="ti ti-sun"></i>';
+  else if(theme === 'light') btn.innerHTML = '<i class="ti ti-moon"></i>';
+  else btn.innerHTML = '<i class="ti ti-moon"></i>';
+}
+function toggleTheme(){
+  if(theme === 'auto'){
+    const sysDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    theme = sysDark ? 'light' : 'dark';
+  } else {
+    theme = theme === 'dark' ? 'light' : 'dark';
+  }
+  localStorage.setItem('apps_theme', theme);
+  applyTheme();
+}
+
+document.getElementById('app-url').addEventListener('keydown', e => { if(e.key==='Enter') saveApp(); });
+document.getElementById('app-name').addEventListener('keydown', e => { if(e.key==='Enter') document.getElementById('app-url').focus(); });
+document.getElementById('year').textContent = new Date().getFullYear();
+
+load();
+render();
+applyTheme();
+</script>
+</body>
+</html>
